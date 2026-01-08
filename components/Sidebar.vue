@@ -2,7 +2,7 @@
   <aside
     :class="[
       'bg-white shadow-md h-screen fixed top-0 left-0 z-40 transition-all duration-300',
-      open ? 'w-64' : 'w-16'
+      open ? 'w-72' : 'w-16'
     ]"
   >
     <!-- Logo -->
@@ -12,12 +12,16 @@
         open ? 'justify-between' : 'justify-center'
     ]"
     >
-    <span
-        v-if="open"
-        class="text-xl font-bold text-green-600"
-    >
-        Linguesc
-    </span>
+          <NuxtLink to="/" class="flex items-center space-x-3">
+        <img
+          src="~/assets/images/logo_linguesc.png"
+          alt="Linguesc"
+          class="h-10 w-auto"
+        />
+        <span class="text-2xl font-bold text-gray-800">
+          Linguesc Hub
+        </span>
+      </NuxtLink>
 
     <button
         @click="$emit('toggle')"
@@ -38,7 +42,7 @@
   </aside>
 
   <!-- Espaçamento quando sidebar é fixa -->
-  <div :class="open ? 'w-64' : 'w-16'"></div>
+  <div :class="open ? 'w-72' : 'w-16'"></div>
 </template>
 
 <script setup>
