@@ -1,10 +1,9 @@
 <template>
   <div class="min-h-screen bg-gray-200 flex flex-col">
-    <Navbar />
     <div class="flex justify-center mt-12">
       <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
         <h1 class="text-2xl font-bold text-center text-gray-800 mb-8">
-          Encontre seus indicadores de dados para seu Jogo Digital Educacional!
+          Plataforma de acompanhamento e engajamento no aprendizado de línguas
         </h1>
         <form @submit.prevent="verificarUsuario" class="space-y-6">
           <div>
@@ -37,11 +36,13 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue';
 import axios from 'axios';
 
+definePageMeta({
+  layout: 'auth'
+})
+
 export default {
-  components: { Navbar },
   data() {
     return {
       email: '',
@@ -49,26 +50,38 @@ export default {
     };
   },
   methods: {
-    async verificarUsuario() {
-      let id = null
-      try {
-        const response = await axios.get('http://localhost:4000/usuarios');
-        const usuarios = response.data;
-        const usuario = usuarios.find(user => user.email === this.email && user.senha === this.senha);
-        if (usuario) {
-          id = usuario.id
-        }
+    // async verificarUsuario() {
+    //   let id = null
+    //   try {
+    //     const response = await axios.get('http://localhost:4000/usuarios');
+    //     const usuarios = response.data;
+    //     const usuario = usuarios.find(user => user.email === this.email && user.senha === this.senha);
+    //     if (usuario) {
+    //       id = usuario.id
+    //     }
 
-        if (usuario) {
-          this.$router.push({path: `/projects/${usuario.id}`});
-        } else {
-          alert('Email ou senha incorretos');
-        }
+    //     if (usuario) {
+    //       this.$router.push({path: `/projects/${usuario.id}`});
+    //     } else {
+    //       alert('Email ou senha incorretos');
+    //     }
+    //   } catch (error) {
+    //     console.error('Erro ao verificar o usuário:', error);
+    //     alert('Erro ao verificar o usuário');
+    //   }
+    // },
+    async verificarUsuario() {
+      try {
+
+        // Por enquanto todos entram no Hub inicial
+        this.$router.push({ path: '/hub' });
+
       } catch (error) {
         console.error('Erro ao verificar o usuário:', error);
         alert('Erro ao verificar o usuário');
       }
     },
+
     goToProfile() {
       this.$router.push('/profile/0');
     }
